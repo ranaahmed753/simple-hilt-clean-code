@@ -5,11 +5,10 @@ import edu.notes.hiltapp.remote.signup.SignupListner
 import javax.inject.Inject
 
 class FirebaseSignupRepository @Inject constructor(
-    private val signupHandler: SignupHandler,
-    private val signupListner: SignupListner
+    private val signupHandler: SignupHandler
 
 ) {
     fun signup(email:String,password:String){
-        signupHandler.signup(email,password,signupListner)
+        signupHandler.signup(email,password)
     }
 }

@@ -1,10 +1,8 @@
-package edu.notes.hiltapp.di
+package edu.notes.hiltapp.di.signup_module
 
-import android.content.Context
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import edu.notes.hiltapp.model.signup_repository.FirebaseSignupRepository
 import edu.notes.hiltapp.model.signup_repository.FirebaseSignupRepositoryImpl
@@ -12,30 +10,33 @@ import edu.notes.hiltapp.remote.signup.FirebaseSignupStrategy
 import edu.notes.hiltapp.remote.signup.SignupHandler
 import edu.notes.hiltapp.remote.signup.SignupListner
 import edu.notes.hiltapp.remote.signup.SignupStrategy
-import edu.notes.hiltapp.utility.animation_controller.AnimationController
 import edu.notes.hiltapp.utility.toast_controller.ToastController
 import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-class AppModule {
-
+class SignupModule {
     @Provides
     @Singleton
-    fun provideContext(@ApplicationContext context: Context) : Context{
-        return context
+    fun provideSignupStrategy(signupListner: SignupListner) : SignupStrategy {
+        return FirebaseSignupStrategy(signupListner)
     }
 
     @Provides
     @Singleton
-    fun provideToastController(context: Context) : ToastController{
-        return ToastController(context)
+    fun provideSignupHandler(signupStrategy: SignupStrategy) : SignupHandler {
+        return SignupHandler(signupStrategy)
     }
 
     @Provides
     @Singleton
-    fun provideAnimationController(context: Context):AnimationController{
-        return AnimationController(context)
+    fun provideSignupListner(toastController: ToastController) : SignupListner{
+        return FirebaseSignupRepositoryImpl(toastController)
     }
 
+    @Provides
+    @Singleton
+    fun provideFirebaseSignupRepository(signupHandler: SignupHandler) : FirebaseSignupRepository {
+        return FirebaseSignupRepository(signupHandler)
+    }
 }

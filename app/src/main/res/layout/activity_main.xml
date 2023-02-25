@@ -8,10 +8,11 @@
             type="edu.notes.hiltapp.User" />
     </data>
 <androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@+id/constraintLayout"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".ui.MainActivity">
 
 
     <TextView

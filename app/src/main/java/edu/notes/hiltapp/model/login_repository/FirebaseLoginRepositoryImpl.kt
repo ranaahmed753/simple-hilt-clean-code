@@ -5,7 +5,7 @@ import edu.notes.hiltapp.remote.login.LoginListner
 import edu.notes.hiltapp.utility.toast_controller.ToastController
 import javax.inject.Inject
 
-class FirebaseLoginStrategyImpl @Inject constructor(
+class FirebaseLoginRepositoryImpl @Inject constructor(
     private val toastController: ToastController
 ) : LoginListner {
     override fun onLoading(message: String) {

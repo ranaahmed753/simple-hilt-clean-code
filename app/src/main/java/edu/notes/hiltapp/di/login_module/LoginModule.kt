@@ -6,7 +6,7 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import edu.notes.hiltapp.model.login_repository.FirebaseLoginRepository
-import edu.notes.hiltapp.model.login_repository.FirebaseLoginStrategyImpl
+import edu.notes.hiltapp.model.login_repository.FirebaseLoginRepositoryImpl
 import edu.notes.hiltapp.remote.login.FirebaseLoginStrategy
 import edu.notes.hiltapp.remote.login.LoginHandler
 import edu.notes.hiltapp.remote.login.LoginListner
@@ -19,8 +19,8 @@ import javax.inject.Singleton
 class LoginModule {
     @Provides
     @Singleton
-    fun provideLoginStrategy() : LoginStrategy{
-        return FirebaseLoginStrategy()
+    fun provideLoginStrategy(loginListner: LoginListner) : LoginStrategy{
+        return FirebaseLoginStrategy(loginListner)
     }
 
     @Provides
@@ -31,14 +31,14 @@ class LoginModule {
 
     @Provides
     @Singleton
-    fun provideFirebaseLoginStrategyImpl(context: Context,toastController: ToastController) : LoginListner{
-        return FirebaseLoginStrategyImpl(toastController)
+    fun provideFirebaseLoginStrategyImpl(toastController: ToastController) : LoginListner{
+        return FirebaseLoginRepositoryImpl(toastController)
     }
 
     @Provides
     @Singleton
-    fun provideFirebaseLoginRepository(loginHandler: LoginHandler,loginListner: LoginListner) : FirebaseLoginRepository {
-        return FirebaseLoginRepository(loginHandler,loginListner)
+    fun provideFirebaseLoginRepository(loginHandler: LoginHandler) : FirebaseLoginRepository {
+        return FirebaseLoginRepository(loginHandler)
     }
 
 

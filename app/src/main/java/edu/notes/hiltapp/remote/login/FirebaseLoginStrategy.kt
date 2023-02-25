@@ -1,12 +1,20 @@
 package edu.notes.hiltapp.remote.login
 
-class FirebaseLoginStrategy : LoginStrategy {
-    override fun login(email: String, password: String, loginListner: LoginListner) {
-        loginListner.onLoading("Loading.....")
+import javax.inject.Inject
+
+class FirebaseLoginStrategy @Inject constructor(
+    private val loginListner: LoginListner
+) : LoginStrategy {
+    private lateinit var _loginListner:LoginListner
+    init {
+        this._loginListner = loginListner
+    }
+    override fun login(email: String, password: String) {
+        _loginListner.onLoading("Loading.....")
         if(email != "" && password != ""){
-            loginListner.onSuccess("you are logged in")
+            _loginListner.onSuccess("you are logged in")
         }else{
-            loginListner.onFailed("logged in failed!!")
+            _loginListner.onFailed("logged in failed!!")
         }
     }
 }

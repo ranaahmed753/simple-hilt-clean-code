@@ -1,9 +1,11 @@
-package edu.notes.hiltapp
+package edu.notes.hiltapp.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
+import edu.notes.hiltapp.CountViewModel
+import edu.notes.hiltapp.R
 import edu.notes.hiltapp.databinding.ActivityCounterBinding
 
 class CounterActivity : AppCompatActivity() {
@@ -12,7 +14,9 @@ class CounterActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         countViewModel=ViewModelProvider(this).get(CountViewModel::class.java)
-       var counterBinding: ActivityCounterBinding = DataBindingUtil.setContentView(this,R.layout.activity_counter)
+       var counterBinding: ActivityCounterBinding = DataBindingUtil.setContentView(this,
+           R.layout.activity_counter
+       )
         counterBinding.countText.text= countViewModel.count.toString()
         counterBinding.addCount.text="Increase By 1"
         counterBinding.addCount.setOnClickListener {

@@ -5,10 +5,9 @@ import edu.notes.hiltapp.remote.login.LoginListner
 import javax.inject.Inject
 
 class FirebaseLoginRepository @Inject constructor(
-    private val loginHandler: LoginHandler,
-    private val loginListner: LoginListner
+    private val loginHandler: LoginHandler
 ) {
     fun login(email:String,password:String){
-        loginHandler.login(email,password,loginListner)
+        loginHandler.login(email,password)
     }
 }

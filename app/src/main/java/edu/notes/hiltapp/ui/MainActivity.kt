@@ -1,4 +1,4 @@
-package edu.notes.hiltapp
+package edu.notes.hiltapp.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -6,12 +6,14 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.lifecycle.lifecycleScope
 import dagger.hilt.android.AndroidEntryPoint
+import edu.notes.hiltapp.CountViewModel
 import edu.notes.hiltapp.databinding.ActivityMainBinding
 import edu.notes.hiltapp.model.login_repository.FirebaseLoginRepository
 import edu.notes.hiltapp.model.signup_repository.FirebaseSignupRepository
 import edu.notes.hiltapp.model.users.UsersRepository
 import edu.notes.hiltapp.remote.signup.SignupHandler
 import edu.notes.hiltapp.remote.signup.SignupListner
+import edu.notes.hiltapp.utility.animation_controller.AnimationController
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -22,6 +24,8 @@ class MainActivity : AppCompatActivity() {
     private lateinit var countText: TextView
     private lateinit var goButton: Button
     private lateinit var mainBinding: ActivityMainBinding
+    @Inject
+    lateinit var animationController: AnimationController
     @Inject
     lateinit var signupHandler: SignupHandler
     @Inject
@@ -65,8 +69,10 @@ class MainActivity : AppCompatActivity() {
 //            startActivity(intent)
 //            finish()
 //        }
+    }
 
-
-
+    override fun onStart() {
+        super.onStart()
+        animationController.slideInLeft(mainBinding.constraintLayout)
     }
 }

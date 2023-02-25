@@ -9,7 +9,7 @@ class LoginHandler @Inject constructor(
     init {
         this.loginStrategy = _loginStrategy
     }
-    fun login(email:String,password:String,loginListner: LoginListner){
-        loginStrategy.login(email,password,loginListner)
+    fun login(email:String,password:String){
+        loginStrategy.login(email,password)
     }
 }

@@ -10,8 +10,8 @@ class SignupHandler @Inject constructor(
     init {
         this._signupStrategy = signupStrategy
     }
-    fun signup(email:String,password:String,signupListner: SignupListner){
-        _signupStrategy.signup(email,password,signupListner)
+    fun signup(email:String,password:String){
+        _signupStrategy.signup(email,password)
     }
 
 }
